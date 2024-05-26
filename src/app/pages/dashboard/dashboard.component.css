@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+
+    /* width: 500px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.5); */
+  }
+  
+  .sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidenav {
+    padding: 1px;
+  }
+
+  .menu-item {
+    display: flex;       /*Use flexbox for alignment*/
+    align-items: center; /* Vertically center items */
+    gap: 10px;           /* Add spacing between icon and text */
+  }
+
+  

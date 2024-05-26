@@ -1,0 +1,22 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <mat-nav-list>
+      <!--use of event binding (click)="drawer.close()"-->
+      <a mat-list-item routerLink="/dashboard/create-account" (click)="drawer.close()">
+        <span class="menu-item"><mat-icon>add</mat-icon>Create Account</span>
+      </a>
+      <a mat-list-item routerLink="/dashboard/accounts" (click)="drawer.close()">
+        <span class="menu-item"><mat-icon>account_balance</mat-icon>Accounts</span>
+      </a>
+      <a mat-list-item routerLink="/dashboard/assistant" (click)="drawer.close()">
+        <span class="menu-item"><mat-icon>chat</mat-icon>Assistant</span>
+      </a>
+  </mat-nav-list>
+  </mat-drawer>
+
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>
