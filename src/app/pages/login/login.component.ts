@@ -20,6 +20,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from "@angular/material/form-field"
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
+import { AuthService } from '../../core/services/auth-service/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -31,8 +33,12 @@ import { MatInputModule } from "@angular/material/input";
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.loginForm = this.fb.group({
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService){
+
+      this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
@@ -43,12 +49,17 @@ export class LoginComponent {
       // Send login credentials to your backend (using a service)
       // ...
       // If login is successful, navigate to the dashboard:
-      this.router.navigate(['/dashboard']);
+      // this.router.navigate(['/dashboard']);
     }
   }
 
-  signInWithGoogle(){
-
+  loginWithGoogle() {
+    this.authService.loginWithGoogle().then(result => {
+      console.log('Logged in successfully:', result);
+      this.router.navigate(['/dashboard']);
+    }).catch(error => {
+      console.error('Login failed:', error);
+    });
   }
 }
 
