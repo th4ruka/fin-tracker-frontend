@@ -8,6 +8,7 @@ import { MatFormFieldModule } from "@angular/material/form-field"
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
 import { AuthService } from '../../core/services/auth-service/auth.service';
+import { NotificationService } from '../../core/services/notification-service/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +23,9 @@ export class SignupComponent {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {
 
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
@@ -56,14 +59,17 @@ export class SignupComponent {
       // Call the AuthService loginWithPassword method
       this.authService.signUpWithEmailAndPassword(email, password).then(user => {
         console.log('Sign up successful:', user);
+        this.notificationService.showSuccess("Sign up successful!");
         // Redirect to a different page (e.g., dashboard) after successful login
         this.router.navigate(['/dashboard']);
       }).catch(error => {
         console.error('Sign up failed:', error);
+        this.notificationService.showError("Sign up failed!");
         // Display error message to the user (optional: show in the template)
       });
     } else {
       console.error('Form is invalid');
+      this.notificationService.showError("Invalid data!");
       // Optionally display an error message that the form is invalid
     }
   }
