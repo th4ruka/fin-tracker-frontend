@@ -50,7 +50,23 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    // Handle form submission and send data to backend
+    if (this.signupForm.valid) {
+      const { email, password } = this.signupForm.value;
+
+      // Call the AuthService loginWithPassword method
+      this.authService.signUpWithEmailAndPassword(email, password).then(user => {
+        console.log('Sign up successful:', user);
+        // Redirect to a different page (e.g., dashboard) after successful login
+        this.router.navigate(['/dashboard']);
+      }).catch(error => {
+        console.error('Sign up failed:', error);
+        // Display error message to the user (optional: show in the template)
+      });
+    } else {
+      console.error('Form is invalid');
+      // Optionally display an error message that the form is invalid
+    }
   }
+
 
 }
