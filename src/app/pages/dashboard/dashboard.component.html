@@ -11,12 +11,15 @@
       <a mat-list-item routerLink="/dashboard/assistant" (click)="drawer.close()">
         <span class="menu-item"><mat-icon>chat</mat-icon>Assistant</span>
       </a>
-  </mat-nav-list>
+    </mat-nav-list>
   </mat-drawer>
 
 
   <div class="sidenav-content">
     <router-outlet></router-outlet>
+    <button (click)="openCreateAccountDialog()" mat-fab color="primary" aria-label="Create account" matTooltip="Create a new account">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 
 </mat-drawer-container>
