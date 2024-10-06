@@ -9,14 +9,15 @@
     height: 300px;
     border: 1px solid rgba(0, 0, 0, 0.5); */
   }
-  
+
   .sidenav-content {
     display: flex;
     height: 100%;
     align-items: center;
     justify-content: center;
+
   }
-  
+
   .sidenav {
     padding: 1px;
   }
@@ -27,4 +28,9 @@
     gap: 10px;           /* Add spacing between icon and text */
   }
 
-  
+  button[mat-fab] {
+    position: fixed;
+    bottom: 80px;    /* Adjust distance from the bottom */
+    right: 40px;     /* Adjust distance from the right */
+    z-index: 1000;   /* Ensure it stays above other content */
+  }
