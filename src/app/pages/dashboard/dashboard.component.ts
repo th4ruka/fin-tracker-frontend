@@ -9,10 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from "@angular/material/list";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  MatDialog,
-  MatDialogModule,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CreateAccountDialogComponent } from '../../core/components/create-account-dialog/create-account-dialog/create-account-dialog.component';
 
 
