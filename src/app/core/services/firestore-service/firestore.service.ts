@@ -25,6 +25,10 @@ export class FirestoreService {
     } else {
       console.log(user.username, " already exists!");
     }
+
+    // // Alternative Approach: Firestore merge Option
+    // await setDoc(userDocRef, user, { merge: true });
+
   }
 
   // Get all users from the 'users' collection
