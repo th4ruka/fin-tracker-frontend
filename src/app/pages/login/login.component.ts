@@ -22,6 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
 import { AuthService } from '../../core/services/auth-service/auth.service';
 import { NotificationService } from '../../core/services/notification-service/notification.service';
+import { FirestoreService } from '../../core/services/firestore-service/firestore.service';
+import { User } from '../../core/models/user';
 
 
 @Component({
@@ -38,7 +40,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private firestoreService: FirestoreService
   ){
       this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -70,7 +73,15 @@ export class LoginComponent {
 
   loginWithGoogle() {
     this.authService.loginWithGoogle().then(result => {
-      console.log('Logged in successfully:', result);
+      const user = result.user;
+      const newUser: User = {
+        id: user.uid,
+        username: user.displayName,
+        email: user.email,
+        createdAt: new Date(),
+        profilePicture: user.photoURL || null
+      };
+      this.firestoreService.addUser(newUser);
       this.notificationService.showSuccess("Login successful!");
       this.router.navigate(['/dashboard']);
     }).catch(error => {
