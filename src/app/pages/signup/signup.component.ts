@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
 import { AuthService } from '../../core/services/auth-service/auth.service';
 import { NotificationService } from '../../core/services/notification-service/notification.service';
+import { User } from '../../core/models/user';
+import { FirestoreService } from '../../core/services/firestore-service/firestore.service';
 
 @Component({
   selector: 'app-signup',
@@ -24,7 +26,8 @@ export class SignupComponent {
   constructor(private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private firestoreService: FirestoreService
   ) {
 
     this.signupForm = this.fb.group({
@@ -36,7 +39,15 @@ export class SignupComponent {
 
   loginWithGoogle() {
     this.authService.loginWithGoogle().then(result => {
-      console.log('Logged in successfully:', result);
+      const user = result.user;
+      const newUser: User = {
+        id: user.uid,
+        username: user.displayName,
+        email: user.email,
+        createdAt: new Date(),
+        profilePicture: user.photoURL || null
+      };
+      this.firestoreService.addUser(newUser);
       this.router.navigate(['/dashboard']);
     }).catch(error => {
       console.error('Login failed:', error);
@@ -58,7 +69,16 @@ export class SignupComponent {
 
       // Call the AuthService loginWithPassword method
       this.authService.signUpWithEmailAndPassword(email, password).then(user => {
-        console.log('Sign up successful:', user);
+        // console.log('Sign up successful:', user);
+        const newUser: User = {
+          id: user.uid,
+          username: this.signupForm.get('username')?.value,
+          email: user.email,
+          createdAt: new Date(),
+          profilePicture: user.photoURL || null
+        };
+        this.firestoreService.addUser(newUser);
+        console.log('Registration successful!', newUser);
         this.notificationService.showSuccess("Sign up successful!");
         // Redirect to a different page (e.g., dashboard) after successful login
         this.router.navigate(['/dashboard']);
