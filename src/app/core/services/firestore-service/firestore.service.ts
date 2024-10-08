@@ -38,7 +38,7 @@ export class FirestoreService {
   }
 
   // Add a new account to a user
-  async addAccount(userId: string, account: any): Promise<void> {
+  async addAccount(userId: any, account: any): Promise<void> {
     const accountsRef = collection(this.firestore, `users/${userId}/accounts`);
     await addDoc(accountsRef, account);
   }
