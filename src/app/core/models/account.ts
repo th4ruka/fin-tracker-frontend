@@ -1,9 +1,11 @@
 export interface Account {
-  id: string;
-  userId: string;
-  accountName: string;
+  id?: string;
+  name: string;
+  type: 'savings' | 'checking' | 'credit' | 'investment';
   balance: number;
   currency: string;
-  createdAt: Date;      
+  description?: string;
+  createdAt: Date;
   updatedAt: Date;
+  userId: string;
 }
