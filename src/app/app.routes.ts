@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 import { CreateAccountComponent } from './pages/dashboard/section/create-account/create-account.component';
 import { AccountsComponent } from './pages/dashboard/section/accounts/accounts.component';
+import { TransactionsComponent } from './pages/dashboard/section/transactions/transactions.component';
 import { AssistantComponent } from './pages/dashboard/section/assistant/assistant.component';
 
 import { authGuard } from './core/guards/auth-guard.guard'; // Adjust path accordingly
@@ -26,6 +27,7 @@ export const routes: Routes = [
             { path: '', component: AccountsComponent }, // Default route for dashboard
             { path: 'create-account', component: CreateAccountComponent },
             { path: 'accounts', component: AccountsComponent },
+            { path: 'transactions', component: TransactionsComponent },
             { path: 'assistant', component: AssistantComponent },
         ]
     },

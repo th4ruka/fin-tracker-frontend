@@ -1,10 +1,14 @@
 export interface Transaction {
-  id: string;
+  id?: string;
   accountId: string;
-  type: 'credit' | 'debit';
+  type: 'income' | 'expense' | 'transfer';
   amount: number;
-  category: string;
   description: string;
-  date: Date;
+  category: string;
+  date: Date; //Do not use Date type, it's not supported by Firestore
   createdAt: Date;
+  updatedAt: Date;
+  userId: string;
+  payee?: string;
+  status: 'completed' | 'pending' | 'cancelled';
 }
